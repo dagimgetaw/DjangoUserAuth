@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <div class="form-box">
+    <h1>Create an Account</h1>
+    <p>Join us today! Fill out the form below to register.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-fields">
+        {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {% if field.errors %}
+          <p class="error">{{ field.errors }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <button type="submit" class="btn">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+  </div>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  .form-box {
+    text-align: center;
+    padding: 30px;
+    width: 350px;
+    border-radius: 8px;
+  }
+  .form-fields {
+    text-align: left;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+  .form-group small,
+  .helptext {
+    display: none;
+  }
+</style>
+{% endblock %}
